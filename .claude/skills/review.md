@@ -3,9 +3,13 @@ description: Code review ระดับงานฝีมือ Shokunin — �
 ---
 # Code Review
 
-## Superpowers Integration
-ถ้าติดตั้ง Superpowers แล้ว: apply Shokunin mindset ด้านล่างก่อน แล้วใช้ `requesting-code-review` skill
+## Plugin Integration
+
+**Superpowers** — apply Shokunin mindset ก่อน แล้วใช้ `requesting-code-review` skill
 Shokunin คือ *มาตรฐาน* ที่ใช้ตัดสิน — `requesting-code-review` คือ *กระบวนการ* รับและให้ review
+
+**feature-dev** — Shokunin mindset นี้คือมาตรฐานที่ `code-reviewer` agent ใน Phase 6 ควรยึดถือ
+ก่อน launch Phase 6: remind Claude ว่า "apply Shokunin standard — name what excels, not just what fails"
 
 ## พื้นฐาน Mindset
 **Shokunin** — เข้าหาในฐานะช่างฝีมือผู้เชี่ยวชาญตัดสินงาน ทุกชื่อ ทุกโครงสร้าง

@@ -18,15 +18,18 @@ if [ -z "$PROMPT" ]; then
   exit 0
 fi
 
-# Check if Superpowers plugin is installed
-SUPERPOWERS_INSTALLED=$(python3 -c "
+# Check installed plugins
+read SUPERPOWERS_INSTALLED FEATUREDEV_INSTALLED <<< $(python3 -c "
 import json, os
 try:
     f = os.path.expanduser('~/.claude/plugins/installed_plugins.json')
     d = json.load(open(f))
-    print('yes' if any('superpowers' in k for k in d.get('plugins', {})) else 'no')
+    keys = d.get('plugins', {}).keys()
+    sp = 'yes' if any('superpowers' in k for k in keys) else 'no'
+    fd = 'yes' if any('feature-dev' in k for k in keys) else 'no'
+    print(sp, fd)
 except Exception:
-    print('no')
+    print('no no')
 " 2>/dev/null)
 
 INJECTION=""
@@ -38,6 +41,7 @@ if echo "$PROMPT" | grep -qE '\b(debug|error|bug|fix|broken|crash|fail|exception
 elif echo "$PROMPT" | grep -qE '\b(review|quality|check|inspect|assess|pr|pull request|lgtm)\b|รีวิว|ตรวจ code|เช็ค code|ดูคุณภาพ'; then
   INJECTION="[SHOKUNIN] Review as a master craftsman. Every name, structure, and decision reflects care or its absence. Name what excels and what can improve."
   [ "$SUPERPOWERS_INSTALLED" = "yes" ] && INJECTION="$INJECTION Use the requesting-code-review skill for the process."
+  [ "$FEATUREDEV_INSTALLED" = "yes" ] && INJECTION="$INJECTION Apply Shokunin standard in feature-dev Phase 6 quality review."
 
 elif echo "$PROMPT" | grep -qE '\b(refactor|improve|clean|cleanup|restructure|simplify|reorganize)\b|ปรับปรุง|จัดระเบียบ|ทำให้ดีขึ้น|ปรับ code'; then
   INJECTION="[KAIZEN] Improve incrementally. Identify the smallest valuable change. Change one thing at a time. Stop at better, not perfect."
@@ -46,6 +50,7 @@ elif echo "$PROMPT" | grep -qE '\b(refactor|improve|clean|cleanup|restructure|si
 elif echo "$PROMPT" | grep -qE '\b(plan|design|architect|feature|build|create|proposal|why|should we)\b|วางแผน|ออกแบบ|ทำไม|ควรจะ|สร้าง feature'; then
   INJECTION="[IKIGAI] Start with purpose. Who is this for? What problem does it solve today? Define done measurably before writing code."
   [ "$SUPERPOWERS_INSTALLED" = "yes" ] && INJECTION="$INJECTION Use the writing-plans skill to structure the plan."
+  [ "$FEATUREDEV_INSTALLED" = "yes" ] && INJECTION="$INJECTION Use /feature-dev — let Ikigai guide Phase 1 Discovery and Phase 3 Clarifying Questions."
 fi
 
 if [ -n "$INJECTION" ]; then
