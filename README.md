@@ -5,6 +5,24 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 
 ---
 
+## ติดตั้ง
+
+```bash
+git clone https://github.com/b2nkuu/b2nkuu-spirit.git
+cd b2nkuu-spirit
+bash install.sh
+```
+
+**อัปเดต:**
+```bash
+git pull && bash install.sh
+```
+
+`install.sh` copy skills + hooks ไปที่ `~/.claude/` และ merge settings อัตโนมัติ
+active ในทุก Claude Code session ทันที ไม่ต้อง config เพิ่มเติม
+
+---
+
 ## Mindsets
 
 | Mindset | ภาษาญี่ปุ่น | แก่นแท้ |
@@ -49,6 +67,7 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 
 ```
 b2nkuu-spirit/
+├── install.sh                  # ติดตั้ง / อัปเดต
 ├── CLAUDE.md                   # Context สำหรับ Claude Code
 ├── mindset/
 │   ├── ikigai.md
@@ -67,24 +86,3 @@ b2nkuu-spirit/
         ├── route-mindset.sh    # UserPromptSubmit
         └── kaizen-reflect.sh   # Stop
 ```
-
----
-
-## ติดตั้ง Global
-
-```bash
-# Clone repo
-git clone https://github.com/b2nkuu/b2nkuu-spirit.git
-
-# Skills
-cp .claude/skills/*.md ~/.claude/skills/
-
-# Hooks
-mkdir -p ~/.claude/hooks
-cp .claude/hooks/*.sh ~/.claude/hooks/
-chmod +x ~/.claude/hooks/*.sh
-
-# Settings — merge hooks section เข้า ~/.claude/settings.json
-```
-
-หลังติดตั้ง skills และ hooks จะ active ในทุก Claude Code session
