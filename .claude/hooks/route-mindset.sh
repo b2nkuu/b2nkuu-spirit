@@ -29,7 +29,7 @@ elif echo "$PROMPT" | grep -qE '\b(review|quality|check|inspect|assess|pr|pull r
 elif echo "$PROMPT" | grep -qE '\b(refactor|improve|clean|cleanup|restructure|simplify|reorganize)\b'; then
   INJECTION="[KAIZEN] Improve incrementally. Identify the smallest valuable change. Change one thing at a time. Stop at better, not perfect."
 
-elif echo "$PROMPT" | grep -qE '\b(plan|design|architect|feature|build|create|proposal|proposal|why|should we)\b'; then
+elif echo "$PROMPT" | grep -qE '\b(plan|design|architect|feature|build|create|proposal|why|should we)\b'; then
   INJECTION="[IKIGAI] Start with purpose. Who is this for? What problem does it solve today? Define done measurably before writing code."
 fi
 
