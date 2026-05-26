@@ -3,6 +3,10 @@ description: Refactor แบบ Kaizen — ปรับปรุงทีละ�
 ---
 # Refactor
 
+## Superpowers Integration
+ถ้าติดตั้ง Superpowers แล้ว: apply Kaizen mindset ด้านล่างก่อน แล้วใช้ `test-driven-development` skill
+Kaizen คือ *ทัศนคติ* ของการปรับปรุงอย่างต่อเนื่อง — `test-driven-development` คือ *วิธี* ทำให้ปลอดภัย
+
 ## พื้นฐาน Mindset
 **Kaizen** — ปรับปรุงทีละก้าว ทุกก้าวเล็กๆ สะสมเป็นผลใหญ่ตามเวลา
 **Wabi-Sabi** — ดีขึ้นและใช้งานได้คือเป้าหมาย ไม่ต้องรอให้สมบูรณ์แบบ

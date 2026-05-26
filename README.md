@@ -35,6 +35,28 @@ git submodule update --remote .spirit && bash .spirit/link.sh
 
 ---
 
+## ใช้ร่วมกับ Superpowers
+
+b2nkuu-spirit ออกแบบให้ทำงานคู่กับ [Superpowers](https://github.com/obra/superpowers):
+
+| b2nkuu-spirit | Superpowers | รวมกัน |
+|--------------|-------------|--------|
+| Gaman (ทำไมต้องอดทน) | `systematic-debugging` (วิธีทำ) | debug อย่างมีสติ |
+| Ikigai (ทำไมต้องสร้าง) | `writing-plans` (วิธีวางแผน) | plan ที่มีจุดมุ่งหมาย |
+| Shokunin (มาตรฐานงานฝีมือ) | `requesting-code-review` (กระบวนการ) | review ที่ลึกและมีระบบ |
+| Kaizen (ทัศนคติปรับปรุง) | `test-driven-development` (วิธีทำให้ปลอดภัย) | refactor อย่างมั่นใจ |
+
+**ติดตั้งทั้งสอง:**
+```bash
+# Superpowers — methodology (HOW)
+/plugin install superpowers@claude-plugins-official
+
+# b2nkuu-spirit — philosophy (WHY)
+bash install.sh
+```
+
+---
+
 ## Mindsets
 
 | Mindset | ภาษาญี่ปุ่น | แก่นแท้ |

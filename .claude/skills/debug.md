@@ -3,6 +3,10 @@ description: วิเคราะห์ root cause แบบ Gaman — อด�
 ---
 # Debug / RCA
 
+## Superpowers Integration
+ถ้าติดตั้ง Superpowers แล้ว: apply Gaman mindset ด้านล่างก่อน แล้วใช้ `systematic-debugging` skill
+Gaman คือ *ทำไม* ต้องอดทน — `systematic-debugging` คือ *วิธี* ทำอย่างเป็นระบบ
+
 ## พื้นฐาน Mindset
 **Gaman** — อดทนด้วยความสงบ อย่ารีบ fix ก่อนเข้าใจสาเหตุ
 ความสงบภายใต้แรงกดดันนำไปสู่การ diagnose ที่ถูกต้อง

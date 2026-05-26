@@ -3,6 +3,10 @@ description: วางแผน feature แบบ Ikigai — เริ่มจ�
 ---
 # Plan
 
+## Superpowers Integration
+ถ้าติดตั้ง Superpowers แล้ว: apply Ikigai mindset ด้านล่างก่อน แล้วใช้ `writing-plans` skill
+Ikigai คือ *ทำไม* ต้องถามก่อนสร้าง — `writing-plans` คือ *วิธี* เขียน plan ที่ subagent ทำตามได้
+
 ## พื้นฐาน Mindset
 **Ikigai** — ทุก feature ต้องมี "ทำไม" ที่ชัดเจนก่อน "อย่างไร"
 จุดมุ่งหมายที่ขาดความชัดเจนสร้างของเสีย ความชัดเจนที่ขาดจุดมุ่งหมายสร้างสิ่งผิด
