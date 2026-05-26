@@ -19,7 +19,7 @@ if [ -z "$PROMPT" ]; then
 fi
 
 # Check installed plugins
-read SUPERPOWERS_INSTALLED FEATUREDEV_INSTALLED <<< $(python3 -c "
+read SUPERPOWERS_INSTALLED FEATUREDEV_INSTALLED PORDEE_INSTALLED <<< $(python3 -c "
 import json, os
 try:
     f = os.path.expanduser('~/.claude/plugins/installed_plugins.json')
@@ -27,9 +27,10 @@ try:
     keys = d.get('plugins', {}).keys()
     sp = 'yes' if any('superpowers' in k for k in keys) else 'no'
     fd = 'yes' if any('feature-dev' in k for k in keys) else 'no'
-    print(sp, fd)
+    pd = 'yes' if any('pordee' in k for k in keys) else 'no'
+    print(sp, fd, pd)
 except Exception:
-    print('no no')
+    print('no no no')
 " 2>/dev/null)
 
 INJECTION=""
@@ -42,6 +43,10 @@ elif echo "$PROMPT" | grep -qE '\b(review|quality|check|inspect|assess|pr|pull r
   INJECTION="[SHOKUNIN] Review as a master craftsman. Every name, structure, and decision reflects care or its absence. Name what excels and what can improve."
   [ "$SUPERPOWERS_INSTALLED" = "yes" ] && INJECTION="$INJECTION Use the requesting-code-review skill for the process."
   [ "$FEATUREDEV_INSTALLED" = "yes" ] && INJECTION="$INJECTION Apply Shokunin standard in feature-dev Phase 6 quality review."
+
+elif echo "$PROMPT" | grep -qE '\b(explain|summarize|describe|comment|document|write)\b|อธิบาย|สรุป|เขียน comment|เขียนอธิบาย'; then
+  INJECTION="[KANSO] Say only what is needed. Cut filler, keep precision. Technical terms stay. Short sentences if meaning is complete."
+  [ "$PORDEE_INSTALLED" = "yes" ] && INJECTION="$INJECTION Pordee is active — apply /pordee full standard."
 
 elif echo "$PROMPT" | grep -qE '\b(refactor|improve|clean|cleanup|restructure|simplify|reorganize)\b|ปรับปรุง|จัดระเบียบ|ทำให้ดีขึ้น|ปรับ code'; then
   INJECTION="[KAIZEN] Improve incrementally. Identify the smallest valuable change. Change one thing at a time. Stop at better, not perfect."

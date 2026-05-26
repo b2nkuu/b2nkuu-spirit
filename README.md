@@ -26,6 +26,7 @@ b2nkuu-spirit ออกแบบให้ทำงานคู่กับ:
 | [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 1, 3 | Ikigai | Discovery ที่มีจุดมุ่งหมาย |
 | [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 4 | Shokunin | Architecture ระดับงานฝีมือ |
 | [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 6 | Shokunin + Kaizen | Quality Review ที่สร้างสรรค์ |
+| [pordee](https://github.com/kerlos/pordee) | Kanso | Implement ความเรียบง่ายในการสื่อสาร 60-75% token saved |
 
 Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอัตโนมัติ และ inject skill reference ที่เหมาะสม
 
@@ -40,6 +41,7 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 | **Shokunin** | 職人 | Code คืองานฝีมือ ทุกชื่อ ทุกโครงสร้าง ล้วนสำคัญ |
 | **Wabi-Sabi** | 侘寂 | Ship ความไม่สมบูรณ์ที่ใช้ได้ จัดการ tech debt อย่างตรงไปตรงมา |
 | **Gaman** | 我慢 | เข้าใจ root cause ก่อน patch อดทนคือพลัง |
+| **Kanso** | 簡素 | ตัดสิ่งไม่จำเป็นออก พูดเท่าที่ต้องการ ความสั้นคือความแม่นยำ |
 
 รายละเอียดเต็ม: [`mindset/`](mindset/)
 
