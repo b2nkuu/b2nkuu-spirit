@@ -8,7 +8,7 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 ## ติดตั้ง
 
 ```bash
-/plugin install b2nkuu-spirit@b2nkuu-marketplace
+/plugin install github:b2nkuu/b2nkuu-spirit
 ```
 
 ---
