@@ -7,19 +7,31 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 
 ## ติดตั้ง
 
+### Global — active ทุก project (one-time setup)
+
 ```bash
 git clone https://github.com/b2nkuu/b2nkuu-spirit.git
 cd b2nkuu-spirit
 bash install.sh
 ```
 
-**อัปเดต:**
+**อัปเดต:** `git pull && bash install.sh`
+
+---
+
+### Per-project — version ต่างกันได้แต่ละ project (submodule)
+
 ```bash
-git pull && bash install.sh
+# เพิ่มครั้งแรก
+git submodule add https://github.com/b2nkuu/b2nkuu-spirit.git .spirit
+bash .spirit/link.sh
+
+# อัปเดต
+git submodule update --remote .spirit && bash .spirit/link.sh
 ```
 
-`install.sh` copy skills + hooks ไปที่ `~/.claude/` และ merge settings อัตโนมัติ
-active ในทุก Claude Code session ทันที ไม่ต้อง config เพิ่มเติม
+`link.sh` สร้าง symlink `.claude/skills`, เพิ่ม `@import` ใน `CLAUDE.md`
+และ configure hooks ใน `.claude/settings.json` ทั้งหมดอยู่ใน project ไม่แตะ `~/.claude/`
 
 ---
 
