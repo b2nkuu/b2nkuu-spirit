@@ -5,6 +5,16 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 
 ---
 
+## Prerequisites
+
+| Requirement | หมายเหตุ |
+|-------------|---------|
+| [Claude Code](https://claude.ai/code) | required |
+| Python 3 | required — hooks ใช้สำหรับ JSON parsing และ plugin detection |
+| [Superpowers](https://github.com/obra/superpowers) | optional — เพิ่ม skill references ใน mindset routing |
+| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) | optional — เพิ่ม phase-based mindset guidance |
+| [pordee](https://github.com/kerlos/pordee) | optional — เพิ่ม Kanso communication mode |
+
 ## ติดตั้ง
 
 ```bash
