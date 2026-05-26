@@ -24,17 +24,3 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 | `/debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
 | `/plan` | Ikigai + Shokunin | วางแผนที่ขับเคลื่อนด้วยจุดมุ่งหมาย |
 
-## การติดตั้ง
-
-ใช้งาน globally ในทุก Claude Code session:
-
-```bash
-# Skills
-cp .claude/skills/*.md ~/.claude/skills/
-
-# Hooks
-cp .claude/hooks/*.sh ~/.claude/hooks/
-chmod +x ~/.claude/hooks/*.sh
-
-# Settings — merge hooks section เข้า ~/.claude/settings.json
-```
