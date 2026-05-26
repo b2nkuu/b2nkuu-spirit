@@ -73,6 +73,14 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 
 ---
 
+## References & Credits
+
+- [obra/superpowers](https://github.com/obra/superpowers) — agentic skills framework: TDD, systematic debugging, writing plans
+- [anthropics/claude-code — feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) — guided feature development with codebase exploration and quality review
+- [kerlos/pordee](https://github.com/kerlos/pordee) — concise Thai communication plugin, inspiration for Kanso mindset
+
+---
+
 ## โครงสร้าง
 
 ```
