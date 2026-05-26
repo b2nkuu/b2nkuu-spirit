@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/route-mindset.sh"
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/route-mindset.sh\""
           }
         ]
       }
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/kaizen-reflect.sh"
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/kaizen-reflect.sh\""
           }
         ]
       }

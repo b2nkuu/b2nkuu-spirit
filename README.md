@@ -7,53 +7,27 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 
 ## ติดตั้ง
 
-### Global — active ทุก project (one-time setup)
-
 ```bash
-git clone https://github.com/b2nkuu/b2nkuu-spirit.git
-cd b2nkuu-spirit
-bash install.sh
+/plugin install b2nkuu-spirit@b2nkuu-marketplace
 ```
-
-**อัปเดต:** `git pull && bash install.sh`
 
 ---
 
-### Per-project — version ต่างกันได้แต่ละ project (submodule)
+## ใช้ร่วมกับ Plugins อื่น
 
-```bash
-# เพิ่มครั้งแรก
-git submodule add https://github.com/b2nkuu/b2nkuu-spirit.git .spirit
-bash .spirit/link.sh
+b2nkuu-spirit ออกแบบให้ทำงานคู่กับ:
 
-# อัปเดต
-git submodule update --remote .spirit && bash .spirit/link.sh
-```
+| Plugin | b2nkuu-spirit | รวมกัน |
+|--------|--------------|--------|
+| [Superpowers](https://github.com/obra/superpowers) `systematic-debugging` | Gaman (ทำไมต้องอดทน) | debug อย่างมีสติ |
+| [Superpowers](https://github.com/obra/superpowers) `writing-plans` | Ikigai (ทำไมต้องสร้าง) | plan ที่มีจุดมุ่งหมาย |
+| [Superpowers](https://github.com/obra/superpowers) `requesting-code-review` | Shokunin (มาตรฐาน) | review ที่ลึกและมีระบบ |
+| [Superpowers](https://github.com/obra/superpowers) `test-driven-development` | Kaizen (ทัศนคติ) | refactor อย่างมั่นใจ |
+| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 1, 3 | Ikigai | Discovery ที่มีจุดมุ่งหมาย |
+| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 4 | Shokunin | Architecture ระดับงานฝีมือ |
+| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 6 | Shokunin + Kaizen | Quality Review ที่สร้างสรรค์ |
 
-`link.sh` สร้าง symlink `.claude/skills`, เพิ่ม `@import` ใน `CLAUDE.md`
-และ configure hooks ใน `.claude/settings.json` ทั้งหมดอยู่ใน project ไม่แตะ `~/.claude/`
-
----
-
-## ใช้ร่วมกับ Superpowers
-
-b2nkuu-spirit ออกแบบให้ทำงานคู่กับ [Superpowers](https://github.com/obra/superpowers):
-
-| b2nkuu-spirit | Superpowers | รวมกัน |
-|--------------|-------------|--------|
-| Gaman (ทำไมต้องอดทน) | `systematic-debugging` (วิธีทำ) | debug อย่างมีสติ |
-| Ikigai (ทำไมต้องสร้าง) | `writing-plans` (วิธีวางแผน) | plan ที่มีจุดมุ่งหมาย |
-| Shokunin (มาตรฐานงานฝีมือ) | `requesting-code-review` (กระบวนการ) | review ที่ลึกและมีระบบ |
-| Kaizen (ทัศนคติปรับปรุง) | `test-driven-development` (วิธีทำให้ปลอดภัย) | refactor อย่างมั่นใจ |
-
-**ติดตั้งทั้งสอง:**
-```bash
-# Superpowers — methodology (HOW)
-/plugin install superpowers@claude-plugins-official
-
-# b2nkuu-spirit — philosophy (WHY)
-bash install.sh
-```
+Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอัตโนมัติ และ inject skill reference ที่เหมาะสม
 
 ---
 
@@ -86,14 +60,14 @@ bash install.sh
 
 | Hook | Event | พฤติกรรม |
 |------|-------|---------|
-| `route-mindset.sh` | `UserPromptSubmit` | Detect keyword → inject mindset context อัตโนมัติ |
+| `route-mindset.sh` | `UserPromptSubmit` | Detect keyword → inject mindset + plugin reference อัตโนมัติ |
 | `kaizen-reflect.sh` | `Stop` | แสดง reflection 3 ข้อหลัง session จบ |
 
 **Keyword mapping:**
-- `debug` / `error` / `bug` / `fix` → **Gaman**
-- `review` / `quality` / `check` → **Shokunin**
-- `refactor` / `improve` / `clean` → **Kaizen**
-- `plan` / `design` / `architect` → **Ikigai**
+- `debug` / `error` / `bug` / `พัง` / `บั๊ก` → **Gaman**
+- `review` / `quality` / `รีวิว` → **Shokunin**
+- `refactor` / `improve` / `ปรับปรุง` → **Kaizen**
+- `plan` / `feature` / `design` / `วางแผน` → **Ikigai**
 
 ---
 
@@ -101,22 +75,22 @@ bash install.sh
 
 ```
 b2nkuu-spirit/
-├── install.sh                  # ติดตั้ง / อัปเดต
-├── CLAUDE.md                   # Context สำหรับ Claude Code
+├── .claude-plugin/
+│   └── plugin.json         # Plugin manifest
+├── CLAUDE.md               # Mindset context สำหรับ Claude
 ├── mindset/
 │   ├── ikigai.md
 │   ├── kaizen.md
 │   ├── shokunin.md
 │   ├── wabi-sabi.md
 │   └── gaman.md
-└── .claude/
-    ├── settings.json           # Hook configuration
-    ├── skills/
-    │   ├── review.md           # /review
-    │   ├── refactor.md         # /refactor
-    │   ├── debug.md            # /debug
-    │   └── plan.md             # /plan
-    └── hooks/
-        ├── route-mindset.sh    # UserPromptSubmit
-        └── kaizen-reflect.sh   # Stop
+├── skills/
+│   ├── review.md           # /review
+│   ├── refactor.md         # /refactor
+│   ├── debug.md            # /debug
+│   └── plan.md             # /plan
+└── hooks/
+    ├── hooks.json          # Hook event configuration
+    ├── route-mindset.sh    # UserPromptSubmit
+    └── kaizen-reflect.sh   # Stop
 ```
