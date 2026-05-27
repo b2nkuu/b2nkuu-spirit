@@ -1,5 +1,7 @@
 ---
-description: Code review ระดับงานฝีมือ Shokunin — ตรวจ craftsmanship, ความชัดเจน, ความถูกต้อง และความสามารถพัฒนาต่อ
+name: review
+description: This skill should be used when the user asks to "review code", "review this PR", "check my code", or invokes "/review". Applies Shokunin mindset — craftsman-level review of correctness, clarity, and maintainability.
+version: 1.0.0
 ---
 # Code Review
 

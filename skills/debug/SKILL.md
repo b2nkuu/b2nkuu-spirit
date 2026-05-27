@@ -1,5 +1,7 @@
 ---
-description: วิเคราะห์ root cause แบบ Gaman — อดทน เป็นระบบ ไม่รีบ patch ก่อนเวลา
+name: debug
+description: This skill should be used when the user asks to "debug", "investigate a bug", "find root cause", "RCA", or invokes "/debug". Applies Gaman mindset — patient, systematic root cause analysis before patching.
+version: 1.0.0
 ---
 # Debug / RCA
 

@@ -1,5 +1,7 @@
 ---
-description: วางแผน feature แบบ Ikigai — เริ่มจากจุดมุ่งหมาย ออกแบบด้วยงานฝีมือ
+name: plan
+description: This skill should be used when the user asks to "plan a feature", "design an approach", "what should we build", or invokes "/plan". Applies Ikigai mindset — start with purpose before implementation.
+version: 1.0.0
 ---
 # Plan
 

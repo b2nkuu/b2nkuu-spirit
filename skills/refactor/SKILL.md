@@ -1,5 +1,7 @@
 ---
-description: Refactor แบบ Kaizen — ปรับปรุงทีละก้าว ไม่ rewrite ทั้งหมด
+name: refactor
+description: This skill should be used when the user asks to "refactor", "clean up code", "improve this", "simplify", or invokes "/refactor". Applies Kaizen mindset — incremental improvement, one step at a time.
+version: 1.0.0
 ---
 # Refactor
 
