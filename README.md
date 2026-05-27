@@ -1,4 +1,4 @@
-# mindset-spirit
+# spirit-mindset
 
 Mindset และ skills หลักสำหรับพัฒนา software อ้างอิงปรัชญาการทำงานแบบญี่ปุ่น
 ใช้ร่วมกับ [Claude Code](https://claude.ai/code)
@@ -18,16 +18,16 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 ## ติดตั้ง
 
 ```bash
-/plugin install github:b2nkuu/mindset-spirit
+/plugin install github:b2nkuu/spirit-mindset
 ```
 
 ---
 
 ## ใช้ร่วมกับ Plugins อื่น
 
-mindset-spirit ออกแบบให้ทำงานคู่กับ:
+spirit-mindset ออกแบบให้ทำงานคู่กับ:
 
-| Plugin | mindset-spirit | รวมกัน |
+| Plugin | spirit-mindset | รวมกัน |
 |--------|--------------|--------|
 | [Superpowers](https://github.com/obra/superpowers) `systematic-debugging` | Gaman (ทำไมต้องอดทน) | debug อย่างมีสติ |
 | [Superpowers](https://github.com/obra/superpowers) `writing-plans` | Ikigai (ทำไมต้องสร้าง) | plan ที่มีจุดมุ่งหมาย |
@@ -94,7 +94,7 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 ## โครงสร้าง
 
 ```
-mindset-spirit/
+spirit-mindset/
 ├── .claude-plugin/
 │   └── plugin.json         # Plugin manifest
 ├── CLAUDE.md               # Mindset context สำหรับ Claude
