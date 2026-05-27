@@ -1,13 +1,13 @@
 {
-  "name": "b2nkuu-spirit",
+  "name": "mindset-spirit",
   "description": "Japanese work philosophy as mindset context for software development — Ikigai, Kaizen, Shokunin, Wabi-Sabi, Gaman. Integrates with Superpowers and feature-dev plugins.",
   "version": "1.0.0",
   "author": {
     "name": "b2nkuu",
     "email": "ban.kuu@yahoo.com"
   },
-  "homepage": "https://github.com/b2nkuu/b2nkuu-spirit",
-  "repository": "https://github.com/b2nkuu/b2nkuu-spirit",
+  "homepage": "https://github.com/b2nkuu/mindset-spirit",
+  "repository": "https://github.com/b2nkuu/mindset-spirit",
   "license": "MIT",
   "keywords": [
     "mindset",
