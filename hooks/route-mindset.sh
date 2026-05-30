@@ -19,17 +19,15 @@ if [ -z "$PROMPT" ]; then
 fi
 
 # Check installed plugins
-read SOLOFLOW_INSTALLED PORDEE_INSTALLED <<< $(python3 -c "
+SOLOFLOW_INSTALLED=$(python3 -c "
 import json, os
 try:
     f = os.path.expanduser('~/.claude/plugins/installed_plugins.json')
     d = json.load(open(f))
     keys = d.get('plugins', {}).keys()
-    sf = 'yes' if any('solo-flow' in k for k in keys) else 'no'
-    pd = 'yes' if any('pordee' in k for k in keys) else 'no'
-    print(sf, pd)
+    print('yes' if any('solo-flow' in k for k in keys) else 'no')
 except Exception:
-    print('no no')
+    print('no')
 " 2>/dev/null)
 
 INJECTION=""
@@ -40,9 +38,8 @@ if echo "$PROMPT" | grep -qE '\b(debug|error|bug|fix|broken|crash|fail|exception
 elif echo "$PROMPT" | grep -qE '\b(review|quality|check|inspect|assess|pr|pull request|lgtm)\b|รีวิว|ตรวจ code|เช็ค code|ดูคุณภาพ'; then
   INJECTION="[SHOKUNIN] Review as a master craftsman. Every name, structure, and decision reflects care or its absence. Name what excels and what can improve."
 
-elif echo "$PROMPT" | grep -qE '\b(explain|summarize|describe|comment|document|write)\b|อธิบาย|สรุป|เขียน comment|เขียนอธิบาย'; then
-  INJECTION="[KANSO] Say only what is needed. Cut filler, keep precision. Technical terms stay. Short sentences if meaning is complete."
-  [ "$PORDEE_INSTALLED" = "yes" ] && INJECTION="$INJECTION Pordee is active — apply /pordee full standard."
+elif echo "$PROMPT" | grep -qE '\b(explain|summarize|describe|comment|document|docs|readme|note|brief|concise|tldr)\b|อธิบาย|สรุป|กระชับ|สั้นๆ|เขียน comment|เขียน doc|เขียนอธิบาย'; then
+  INJECTION="[KANSO] Say only what is needed. Cut filler, keep precision. Technical terms stay. Short sentences if meaning is complete. Apply /kanso process: write long, cut filler, test 'can this word go?', stop at 'meaning complete' not 'shortest possible'. Full prose for security warnings, irreversible commands, ordered multi-step procedures."
 
 elif echo "$PROMPT" | grep -qE '\b(refactor|improve|clean|cleanup|restructure|simplify|reorganize)\b|ปรับปรุง|จัดระเบียบ|ทำให้ดีขึ้น|ปรับ code'; then
   INJECTION="[KAIZEN] Improve incrementally. Identify the smallest valuable change. Change one thing at a time. Stop at better, not perfect."
