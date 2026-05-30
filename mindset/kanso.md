@@ -15,8 +15,12 @@ Kanso — "ความเรียบง่าย" — หนึ่งใน 7 
 - token ที่ประหยัดได้คือ attention ที่เหลือไว้ใช้กับสิ่งที่สำคัญ
 
 ## ในทางปฏิบัติ
-ใช้ `/kanso` skill เมื่อต้องเขียน comment, อธิบาย, สรุป
-หรือสื่อสาร technical content — skill จะ apply หลักการนี้ใน response
+Kanso ทำงาน **auto** ผ่าน hook `route-mindset.sh` — เมื่อ prompt มี keyword
+เช่น `explain`, `summarize`, `comment`, `document`, `อธิบาย`, `สรุป`, `กระชับ`
+hook จะ inject Kanso guideline เข้า response อัตโนมัติ
+
+ไม่มี slash command — เพราะ communication style ควรเกิดจาก intent ของ prompt
+ไม่ใช่ toggle ที่ต้องจำ
 
 Kanso รู้ว่าเมื่อไรต้องหยุด — security warnings, คำสั่ง irreversible,
 ขั้นตอนหลายสเต็ปที่ลำดับสำคัญ ใช้ภาษาเต็มเสมอ

@@ -24,5 +24,6 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 | `/refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว |
 | `/inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
 | `/debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
-| `/kanso` | Kanso + Shokunin | สื่อสาร/เขียน comment อย่างกระชับ |
+
+**Kanso**: ไม่มี slash command — hook auto-trigger จาก keyword (`explain`/`summarize`/`comment`/`อธิบาย`/`สรุป`)
 

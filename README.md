@@ -59,7 +59,8 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 | `/refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว ไม่ rewrite |
 | `/inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
 | `/debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
-| `/kanso` | Kanso + Shokunin | สื่อสาร/เขียน comment/อธิบายอย่างกระชับ |
+
+> **Kanso** ไม่มี skill — auto-trigger จาก hook เมื่อ prompt มี keyword เช่น `explain` `summarize` `comment` `อธิบาย` `สรุป` `กระชับ`
 
 ---
 
@@ -103,8 +104,7 @@ spirit-mindset/
 │   ├── design/             # /design
 │   ├── refactor/           # /refactor
 │   ├── inspect/            # /inspect
-│   ├── debug/              # /debug
-│   └── kanso/              # /kanso
+│   └── debug/              # /debug
 └── hooks/
     ├── hooks.json          # Hook event configuration
     ├── route-mindset.sh    # UserPromptSubmit
