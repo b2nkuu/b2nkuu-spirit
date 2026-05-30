@@ -11,7 +11,7 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 |-------------|---------|
 | [Claude Code](https://claude.ai/code) | required |
 | Python 3 | required — hooks ใช้สำหรับ JSON parsing และ plugin detection |
-| [solo-flow](https://github.com/b2nkuu/solo-flow) | optional — task management ผ่าน GitHub Issues, จับคู่กับ Kaizen/Ikigai |
+| [solo](https://github.com/b2nkuu/solo) | optional — task management ผ่าน GitHub Issues, จับคู่กับ Kaizen/Ikigai |
 
 ## ติดตั้ง
 
@@ -27,10 +27,10 @@ spirit ออกแบบให้ทำงานคู่กับ:
 
 | Plugin | spirit | รวมกัน |
 |--------|--------------|--------|
-| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:plan` | Ikigai (ทำไมต้องทำ) | จัด inbox ด้วยจุดมุ่งหมาย |
-| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:capture` `/solo:done` `/solo:week` | Kaizen (ก้าวเล็ก + สะท้อน) | task ทีละก้าว, close loop, review 7 วัน |
-| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:capture` (tech debt) | Wabi-Sabi (ship + track debt) | ยอมรับความไม่สมบูรณ์ เก็บ debt อย่างซื่อสัตย์ |
-| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:today` `/solo:start` | Kanso (focus 1 task) | ตัด noise เหลือสิ่งที่ต้องทำ |
+| [solo](https://github.com/b2nkuu/solo) `/solo:plan` | Ikigai (ทำไมต้องทำ) | จัด inbox ด้วยจุดมุ่งหมาย |
+| [solo](https://github.com/b2nkuu/solo) `/solo:capture` `/solo:done` `/solo:week` | Kaizen (ก้าวเล็ก + สะท้อน) | task ทีละก้าว, close loop, review 7 วัน |
+| [solo](https://github.com/b2nkuu/solo) `/solo:capture` (tech debt) | Wabi-Sabi (ship + track debt) | ยอมรับความไม่สมบูรณ์ เก็บ debt อย่างซื่อสัตย์ |
+| [solo](https://github.com/b2nkuu/solo) `/solo:today` `/solo:start` | Kanso (focus 1 task) | ตัด noise เหลือสิ่งที่ต้องทำ |
 
 Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอัตโนมัติ และ inject skill reference ที่เหมาะสม
 
@@ -82,7 +82,7 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 
 ## References & Credits
 
-- [b2nkuu/solo-flow](https://github.com/b2nkuu/solo-flow) — solopreneur task management via GitHub Issues, pairs with Kaizen incremental flow
+- [b2nkuu/solo](https://github.com/b2nkuu/solo) — solopreneur task management via GitHub Issues, pairs with Kaizen incremental flow
 
 ---
 

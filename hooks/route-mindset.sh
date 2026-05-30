@@ -25,7 +25,7 @@ try:
     f = os.path.expanduser('~/.claude/plugins/installed_plugins.json')
     d = json.load(open(f))
     keys = d.get('plugins', {}).keys()
-    print('yes' if any('solo-flow' in k for k in keys) else 'no')
+    print('yes' if any(k == 'solo' or k.endswith('/solo') for k in keys) else 'no')
 except Exception:
     print('no')
 " 2>/dev/null)

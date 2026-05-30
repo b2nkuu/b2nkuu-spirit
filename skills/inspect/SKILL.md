@@ -7,8 +7,8 @@ version: 1.0.0
 
 ## Plugin Integration
 
-**solo-flow** — เจอ issue ระหว่าง review ที่ไม่ใช่ blocker → `/solo:capture` เก็บเป็น follow-up task
-Shokunin ตั้งมาตรฐาน — solo-flow ตามรอย improvement ที่ยังไม่ได้ทำ
+**solo** — เจอ issue ระหว่าง review ที่ไม่ใช่ blocker → `/solo:capture` เก็บเป็น follow-up task
+Shokunin ตั้งมาตรฐาน — solo ตามรอย improvement ที่ยังไม่ได้ทำ
 
 ## พื้นฐาน Mindset
 **Shokunin** — เข้าหาในฐานะช่างฝีมือผู้เชี่ยวชาญตัดสินงาน ทุกชื่อ ทุกโครงสร้าง

@@ -5,9 +5,9 @@ version: 1.0.0
 ---
 # Refactor
 
-## solo-flow Integration
-ถ้าติดตั้ง solo-flow แล้ว: เจอ improvement ที่ไม่อยู่ใน scope ปัจจุบัน → `/solo:capture` เก็บเป็น task ไว้ทำทีหลัง
-Kaizen คือก้าวเล็กๆ สะสม — solo-flow ช่วยให้ก้าวเล็กๆ ไม่หล่นหาย
+## solo Integration
+ถ้าติดตั้ง solo แล้ว: เจอ improvement ที่ไม่อยู่ใน scope ปัจจุบัน → `/solo:capture` เก็บเป็น task ไว้ทำทีหลัง
+Kaizen คือก้าวเล็กๆ สะสม — solo ช่วยให้ก้าวเล็กๆ ไม่หล่นหาย
 
 ## พื้นฐาน Mindset
 **Kaizen** — ปรับปรุงทีละก้าว ทุกก้าวเล็กๆ สะสมเป็นผลใหญ่ตามเวลา

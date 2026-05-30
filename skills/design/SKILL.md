@@ -7,8 +7,8 @@ version: 1.0.0
 
 ## Plugin Integration
 
-**solo-flow** — หลังกำหนด "ทำไม" แล้ว ใช้ `/solo:plan` จัด inbox และ `/solo:capture` แตก design เป็น task บน GitHub Issues
-Ikigai กำหนดจุดมุ่งหมาย — solo-flow แตกจุดมุ่งหมายเป็นก้าวเล็กๆ ที่ track ได้
+**solo** — หลังกำหนด "ทำไม" แล้ว ใช้ `/solo:plan` จัด inbox และ `/solo:capture` แตก design เป็น task บน GitHub Issues
+Ikigai กำหนดจุดมุ่งหมาย — solo แตกจุดมุ่งหมายเป็นก้าวเล็กๆ ที่ track ได้
 
 ## พื้นฐาน Mindset
 **Ikigai** — ทุก feature ต้องมี "ทำไม" ที่ชัดเจนก่อน "อย่างไร"
