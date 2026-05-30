@@ -1,17 +1,14 @@
 ---
-name: review
-description: This skill should be used when the user asks to "review code", "review this PR", "check my code", or invokes "/review". Applies Shokunin mindset — craftsman-level review of correctness, clarity, and maintainability.
+name: inspect
+description: This skill should be used when the user asks to "inspect code", "review code", "review this PR", "check my code", or invokes "/inspect". Applies Shokunin mindset — craftsman-level inspection of correctness, clarity, and maintainability.
 version: 1.0.0
 ---
-# Code Review
+# Inspect (Code Review)
 
 ## Plugin Integration
 
-**Superpowers** — apply Shokunin mindset ก่อน แล้วใช้ `requesting-code-review` skill
-Shokunin คือ *มาตรฐาน* ที่ใช้ตัดสิน — `requesting-code-review` คือ *กระบวนการ* รับและให้ review
-
-**feature-dev** — Shokunin mindset นี้คือมาตรฐานที่ `code-reviewer` agent ใน Phase 6 ควรยึดถือ
-ก่อน launch Phase 6: remind Claude ว่า "apply Shokunin standard — name what excels, not just what fails"
+**solo-flow** — เจอ issue ระหว่าง review ที่ไม่ใช่ blocker → `/solo:capture` เก็บเป็น follow-up task
+Shokunin ตั้งมาตรฐาน — solo-flow ตามรอย improvement ที่ยังไม่ได้ทำ
 
 ## พื้นฐาน Mindset
 **Shokunin** — เข้าหาในฐานะช่างฝีมือผู้เชี่ยวชาญตัดสินงาน ทุกชื่อ ทุกโครงสร้าง

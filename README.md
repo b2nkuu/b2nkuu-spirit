@@ -11,8 +11,7 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 |-------------|---------|
 | [Claude Code](https://claude.ai/code) | required |
 | Python 3 | required — hooks ใช้สำหรับ JSON parsing และ plugin detection |
-| [Superpowers](https://github.com/obra/superpowers) | optional — เพิ่ม skill references ใน mindset routing |
-| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) | optional — เพิ่ม phase-based mindset guidance |
+| [solo-flow](https://github.com/b2nkuu/solo-flow) | optional — task management ผ่าน GitHub Issues, จับคู่กับ Kaizen/Ikigai |
 | [pordee](https://github.com/kerlos/pordee) | optional — เพิ่ม Kanso communication mode |
 
 ## ติดตั้ง
@@ -29,14 +28,11 @@ spirit-mindset ออกแบบให้ทำงานคู่กับ:
 
 | Plugin | spirit-mindset | รวมกัน |
 |--------|--------------|--------|
-| [Superpowers](https://github.com/obra/superpowers) `systematic-debugging` | Gaman (ทำไมต้องอดทน) | debug อย่างมีสติ |
-| [Superpowers](https://github.com/obra/superpowers) `writing-plans` | Ikigai (ทำไมต้องสร้าง) | plan ที่มีจุดมุ่งหมาย |
-| [Superpowers](https://github.com/obra/superpowers) `requesting-code-review` | Shokunin (มาตรฐาน) | review ที่ลึกและมีระบบ |
-| [Superpowers](https://github.com/obra/superpowers) `test-driven-development` | Kaizen (ทัศนคติ) | refactor อย่างมั่นใจ |
-| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 1, 3 | Ikigai | Discovery ที่มีจุดมุ่งหมาย |
-| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 4 | Shokunin | Architecture ระดับงานฝีมือ |
-| [feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) Phase 6 | Shokunin + Kaizen | Quality Review ที่สร้างสรรค์ |
-| [pordee](https://github.com/kerlos/pordee) | Kanso | Implement ความเรียบง่ายในการสื่อสาร 60-75% token saved |
+| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:plan` | Ikigai (ทำไมต้องทำ) | จัด inbox ด้วยจุดมุ่งหมาย |
+| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:capture` `/solo:done` `/solo:week` | Kaizen (ก้าวเล็ก + สะท้อน) | task ทีละก้าว, close loop, review 7 วัน |
+| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:capture` (tech debt) | Wabi-Sabi (ship + track debt) | ยอมรับความไม่สมบูรณ์ เก็บ debt อย่างซื่อสัตย์ |
+| [solo-flow](https://github.com/b2nkuu/solo-flow) `/solo:today` `/solo:start` | Kanso (focus 1 task) | ตัด noise เหลือสิ่งที่ต้องทำ |
+| [pordee](https://github.com/kerlos/pordee) | Kanso (สื่อสาร) | ความเรียบง่ายในการสื่อสาร 60-75% token saved |
 
 Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอัตโนมัติ และ inject skill reference ที่เหมาะสม
 
@@ -61,10 +57,10 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 
 | Command | Mindset | จุดประสงค์ |
 |---------|---------|-----------|
-| `/review` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
+| `/inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
 | `/refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว ไม่ rewrite |
 | `/debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
-| `/plan` | Ikigai + Shokunin | วางแผน feature จากจุดมุ่งหมาย |
+| `/design` | Ikigai + Shokunin | ออกแบบ feature จากจุดมุ่งหมาย |
 
 ---
 
@@ -77,16 +73,15 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 
 **Keyword mapping:**
 - `debug` / `error` / `bug` / `พัง` / `บั๊ก` → **Gaman**
-- `review` / `quality` / `รีวิว` → **Shokunin**
+- `inspect` / `review` / `quality` / `รีวิว` / `ตรวจ` → **Shokunin**
 - `refactor` / `improve` / `ปรับปรุง` → **Kaizen**
-- `plan` / `feature` / `design` / `วางแผน` → **Ikigai**
+- `design` / `plan` / `feature` / `architect` / `ออกแบบ` / `วางแผน` → **Ikigai**
 
 ---
 
 ## References & Credits
 
-- [obra/superpowers](https://github.com/obra/superpowers) — agentic skills framework: TDD, systematic debugging, writing plans
-- [anthropics/claude-code — feature-dev](https://github.com/anthropics/claude-code/tree/main/plugins/feature-dev) — guided feature development with codebase exploration and quality review
+- [b2nkuu/solo-flow](https://github.com/b2nkuu/solo-flow) — solopreneur task management via GitHub Issues, pairs with Kaizen incremental flow
 - [kerlos/pordee](https://github.com/kerlos/pordee) — concise Thai communication plugin, inspiration for Kanso mindset
 
 ---
@@ -105,10 +100,10 @@ spirit-mindset/
 │   ├── wabi-sabi.md
 │   └── gaman.md
 ├── skills/
-│   ├── review.md           # /review
+│   ├── inspect.md          # /inspect
 │   ├── refactor.md         # /refactor
 │   ├── debug.md            # /debug
-│   └── plan.md             # /plan
+│   └── design.md           # /design
 └── hooks/
     ├── hooks.json          # Hook event configuration
     ├── route-mindset.sh    # UserPromptSubmit

@@ -1,6 +1,6 @@
 {
   "name": "spirit-mindset",
-  "description": "Japanese work philosophy as mindset context for software development — Ikigai, Kaizen, Shokunin, Wabi-Sabi, Gaman. Integrates with Superpowers and feature-dev plugins.",
+  "description": "Japanese work philosophy as mindset context for software development — Ikigai, Kaizen, Shokunin, Wabi-Sabi, Gaman. Integrates with solo-flow and pordee plugins.",
   "version": "1.0.0",
   "author": {
     "name": "b2nkuu",

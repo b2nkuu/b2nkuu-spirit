@@ -1,23 +1,14 @@
 ---
-name: plan
-description: This skill should be used when the user asks to "plan a feature", "design an approach", "what should we build", or invokes "/plan". Applies Ikigai mindset — start with purpose before implementation.
+name: design
+description: This skill should be used when the user asks to "design a feature", "plan an approach", "architect", "what should we build", or invokes "/design". Applies Ikigai mindset — start with purpose before implementation.
 version: 1.0.0
 ---
-# Plan
+# Design
 
 ## Plugin Integration
 
-**Superpowers** — apply Ikigai mindset ก่อน แล้วใช้ `writing-plans` skill
-Ikigai คือ *ทำไม* ต้องถามก่อนสร้าง — `writing-plans` คือ *วิธี* เขียน plan ที่ subagent ทำตามได้
-
-**feature-dev** — ใช้ `/feature-dev` command แล้วให้ mindset นำทางแต่ละ phase:
-| Phase | Mindset | จุดเน้น |
-|-------|---------|--------|
-| Phase 1: Discovery | **Ikigai** | ถามทำไมก่อน — ถ้าตอบไม่ได้ ยังไม่พร้อม build |
-| Phase 3: Clarifying Questions | **Ikigai** | อย่ารีบ assume — ทุก ambiguity คือ Ikigai ที่ขาด |
-| Phase 4: Architecture Design | **Shokunin** | เลือก approach ที่ elegant ที่สุด ไม่ใช่เร็วที่สุด |
-| Phase 5: Implementation | **Wabi-Sabi** | ship ที่ทำงานได้ก่อน ปรับปรุงรอบต่อไป |
-| Phase 6: Quality Review | **Shokunin** + **Kaizen** | ทุก issue คือโอกาสปรับปรุง |
+**solo-flow** — หลังกำหนด "ทำไม" แล้ว ใช้ `/solo:plan` จัด inbox และ `/solo:capture` แตก design เป็น task บน GitHub Issues
+Ikigai กำหนดจุดมุ่งหมาย — solo-flow แตกจุดมุ่งหมายเป็นก้าวเล็กๆ ที่ track ได้
 
 ## พื้นฐาน Mindset
 **Ikigai** — ทุก feature ต้องมี "ทำไม" ที่ชัดเจนก่อน "อย่างไร"

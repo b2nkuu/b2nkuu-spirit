@@ -20,8 +20,8 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 
 | Command | Mindset | จุดประสงค์ |
 |---------|---------|-----------|
-| `/review` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
+| `/inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
 | `/refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว |
 | `/debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
-| `/plan` | Ikigai + Shokunin | วางแผนที่ขับเคลื่อนด้วยจุดมุ่งหมาย |
+| `/design` | Ikigai + Shokunin | ออกแบบที่ขับเคลื่อนด้วยจุดมุ่งหมาย |
 
