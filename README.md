@@ -55,10 +55,10 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 
 | Command | Mindset | จุดประสงค์ |
 |---------|---------|-----------|
-| `/design` | Ikigai + Shokunin | ออกแบบ feature จากจุดมุ่งหมาย |
-| `/refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว ไม่ rewrite |
-| `/inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
-| `/debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
+| `/spirit:design` | Ikigai + Shokunin | ออกแบบ feature จากจุดมุ่งหมาย |
+| `/spirit:refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว ไม่ rewrite |
+| `/spirit:inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
+| `/spirit:debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
 
 > **Kanso** ไม่มี skill — auto-trigger จาก hook เมื่อ prompt มี keyword เช่น `explain` `summarize` `comment` `อธิบาย` `สรุป` `กระชับ`
 

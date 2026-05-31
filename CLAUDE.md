@@ -20,10 +20,10 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 
 | Command | Mindset | จุดประสงค์ |
 |---------|---------|-----------|
-| `/design` | Ikigai + Shokunin | ออกแบบที่ขับเคลื่อนด้วยจุดมุ่งหมาย |
-| `/refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว |
-| `/inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
-| `/debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
+| `/spirit:design` | Ikigai + Shokunin | ออกแบบที่ขับเคลื่อนด้วยจุดมุ่งหมาย |
+| `/spirit:refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว |
+| `/spirit:inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
+| `/spirit:debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
 
 **Kanso**: ไม่มี slash command — hook auto-trigger จาก keyword (`explain`/`summarize`/`comment`/`อธิบาย`/`สรุป`)
 
