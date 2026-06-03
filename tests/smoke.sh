@@ -74,6 +74,8 @@ echo "branch-guard.sh"
 
 GUARD_REPO=$(mktemp -d)
 git -C "$GUARD_REPO" init -q -b main
+git -C "$GUARD_REPO" config user.email "test@spirit.local"
+git -C "$GUARD_REPO" config user.name "spirit-test"
 git -C "$GUARD_REPO" commit -q --allow-empty -m init
 
 t_guard_blocks_edit_on_main() {
