@@ -53,6 +53,11 @@ fi
 if [ -n "$INJECTION" ]; then
   python3 -c "
 import json, sys
-print(json.dumps({'prompt_injection': sys.argv[1]}))
+print(json.dumps({
+    'hookSpecificOutput': {
+        'hookEventName': 'UserPromptSubmit',
+        'additionalContext': sys.argv[1]
+    }
+}))
 " "$INJECTION"
 fi
