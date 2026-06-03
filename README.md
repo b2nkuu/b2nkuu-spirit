@@ -60,7 +60,7 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 | `/spirit:inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
 | `/spirit:debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
 
-> **Kanso** ไม่มี skill — auto-trigger จาก hook เมื่อ prompt มี keyword เช่น `explain` `summarize` `comment` `อธิบาย` `สรุป` `กระชับ`
+> **Kanso** ไม่มี skill และไม่มี hook injection — เป็น mindset background ใช้คู่กับ [pordee](https://github.com/b2nkuu/pordee) plugin ถ้าต้องการ tone compression ระดับ session
 
 ---
 
@@ -76,7 +76,6 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 - `inspect` / `review` / `quality` / `รีวิว` / `ตรวจ` → **Shokunin**
 - `refactor` / `improve` / `ปรับปรุง` → **Kaizen**
 - `design` / `plan` / `feature` / `architect` / `ออกแบบ` / `วางแผน` → **Ikigai**
-- `explain` / `summarize` / `comment` / `document` / `docs` / `readme` / `brief` / `concise` / `อธิบาย` / `สรุป` / `กระชับ` / `สั้นๆ` → **Kanso** (auto)
 
 ---
 

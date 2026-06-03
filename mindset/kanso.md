@@ -15,12 +15,11 @@ Kanso — "ความเรียบง่าย" — หนึ่งใน 7 
 - token ที่ประหยัดได้คือ attention ที่เหลือไว้ใช้กับสิ่งที่สำคัญ
 
 ## ในทางปฏิบัติ
-Kanso ทำงาน **auto** ผ่าน hook `route-mindset.sh` — เมื่อ prompt มี keyword
-เช่น `explain`, `summarize`, `comment`, `document`, `อธิบาย`, `สรุป`, `กระชับ`
-hook จะ inject Kanso guideline เข้า response อัตโนมัติ
+Kanso ไม่มี slash command และไม่มี hook injection — เพราะ communication
+style ควรเกิดจาก intent ของ prompt ไม่ใช่ keyword routing
 
-ไม่มี slash command — เพราะ communication style ควรเกิดจาก intent ของ prompt
-ไม่ใช่ toggle ที่ต้องจำ
+ถ้าต้องการ tone compression แบบจริงจัง ใช้ `pordee` plugin คู่กัน
+(`/pordee` หรือ `/pordee lite`) ซึ่งทำงานในระดับ session ไม่ใช่ต่อ prompt
 
 Kanso รู้ว่าเมื่อไรต้องหยุด — security warnings, คำสั่ง irreversible,
 ขั้นตอนหลายสเต็ปที่ลำดับสำคัญ ใช้ภาษาเต็มเสมอ

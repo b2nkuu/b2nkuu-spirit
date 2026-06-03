@@ -1,0 +1,88 @@
+name: Nightly Build
+
+on:
+  schedule:
+    # 17:00 UTC = 00:00 Asia/Bangkok next day
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Tag + Release if new commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute CalVer
+        id: ver
+        run: |
+          TODAY=$(TZ=Asia/Bangkok date +%Y.%m.%d)
+          echo "today=$TODAY" >> "$GITHUB_OUTPUT"
+          echo "tag=v$TODAY" >> "$GITHUB_OUTPUT"
+
+      - name: Skip if no commits since last tag
+        id: gate
+        run: |
+          LAST=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST" ]; then
+            echo "no prior tag — will release"
+            echo "release=yes" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          COUNT=$(git rev-list "$LAST..HEAD" --count)
+          echo "$COUNT commits since $LAST"
+          if [ "$COUNT" = "0" ]; then
+            echo "release=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "release=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate plugin + hooks
+        if: steps.gate.outputs.release == 'yes'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq shellcheck
+          shellcheck -S warning hooks/*.sh tests/*.sh
+          bash tests/smoke.sh
+
+      - name: Bump plugin.json version
+        if: steps.gate.outputs.release == 'yes'
+        run: |
+          TODAY="${{ steps.ver.outputs.today }}"
+          CURRENT=$(jq -r .version .claude-plugin/plugin.json)
+          if [ "$CURRENT" = "$TODAY" ]; then
+            echo "version already $TODAY — skipping bump"
+            exit 0
+          fi
+          tmp=$(mktemp)
+          jq --arg v "$TODAY" '.version = $v' .claude-plugin/plugin.json > "$tmp"
+          mv "$tmp" .claude-plugin/plugin.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude-plugin/plugin.json
+          git commit -m "chore(release): bump version to $TODAY"
+          git push origin main
+
+      - name: Tag + Release
+        if: steps.gate.outputs.release == 'yes'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.ver.outputs.tag }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "tag $TAG already exists — skipping"
+            exit 0
+          fi
+          git tag -a "$TAG" -m "Nightly release $TAG"
+          git push origin "$TAG"
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --notes "Automated nightly release. See commit history for changes." \
+            --target main
