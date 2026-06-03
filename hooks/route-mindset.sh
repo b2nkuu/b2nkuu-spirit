@@ -38,9 +38,6 @@ if echo "$PROMPT" | grep -qE '\b(debug|error|bug|fix|broken|crash|fail|exception
 elif echo "$PROMPT" | grep -qE '\b(review|quality|check|inspect|assess|pr|pull request|lgtm)\b|รีวิว|ตรวจ code|เช็ค code|ดูคุณภาพ'; then
   INJECTION="[SHOKUNIN] Review as a master craftsman. Every name, structure, and decision reflects care or its absence. Name what excels and what can improve."
 
-elif echo "$PROMPT" | grep -qE '\b(explain|summarize|describe|comment|document|docs|readme|note|brief|concise|tldr)\b|อธิบาย|สรุป|กระชับ|สั้นๆ|เขียน comment|เขียน doc|เขียนอธิบาย'; then
-  INJECTION="[KANSO] Say only what is needed. Cut filler, keep precision. Technical terms stay. Short sentences if meaning is complete. Process: write long, cut filler, test 'can this word go?', stop at 'meaning complete' not 'shortest possible'. Full prose for security warnings, irreversible commands, ordered multi-step procedures."
-
 elif echo "$PROMPT" | grep -qE '\b(refactor|improve|clean|cleanup|restructure|simplify|reorganize)\b|ปรับปรุง|จัดระเบียบ|ทำให้ดีขึ้น|ปรับ code'; then
   INJECTION="[KAIZEN] Improve incrementally. Identify the smallest valuable change. Change one thing at a time. Stop at better, not perfect."
   [ "$SOLOFLOW_INSTALLED" = "yes" ] && INJECTION="$INJECTION Capture follow-up tasks via /solo:capture so improvements stay tracked."
