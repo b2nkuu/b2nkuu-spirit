@@ -1,0 +1,35 @@
+# solo configuration
+version: 1
+
+repo: "b2nkuu/spirit"
+
+defaults:
+  inbox_label: "status:inbox"
+  capture_type_guessing: true
+
+trunk:
+  name: "main"
+  max_branch_age_days: 2
+
+branch:
+  enabled: true
+  pattern: "{type}/{issue}-{slug}"
+  branch_from_trunk: true
+
+note:
+  storage: "comment"
+  decision_prefix: "[decision]"
+
+release:
+  tag_pattern: "v{version}"
+  version_scheme: "calver"
+  version_format: "%Y.%m.%d"
+  initial_version: "2026.06.03"
+
+milestone:
+  current: ""
+  required: false
+
+display:
+  today_suggested_limit: 5
+  date_format: "%Y-%m-%d"
