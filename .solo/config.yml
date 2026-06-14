@@ -21,7 +21,7 @@ note:
   decision_prefix: "[decision]"
 
 release:
-  tag_pattern: "v{version}"
+  tag_pattern: "{version}"
   version_scheme: "calver"
   version_format: "%Y.%m.%d"
   initial_version: "2026.06.03"
