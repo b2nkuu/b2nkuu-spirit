@@ -55,6 +55,7 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 
 | Command | Mindset | จุดประสงค์ |
 |---------|---------|-----------|
+| `/spirit:init` | — | Setup ครั้งเดียวต่อ repo: เพิ่ม `.spirit/` ใน `.gitignore` + สร้าง `.spirit/reflections/` |
 | `/spirit:design` | Ikigai + Shokunin | ออกแบบ feature จากจุดมุ่งหมาย |
 | `/spirit:refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว ไม่ rewrite |
 | `/spirit:inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
@@ -100,10 +101,11 @@ spirit/
 │   ├── gaman.md
 │   └── kanso.md
 ├── skills/
-│   ├── design/             # /design
-│   ├── refactor/           # /refactor
-│   ├── inspect/            # /inspect
-│   └── debug/              # /debug
+│   ├── init/               # /spirit:init
+│   ├── design/             # /spirit:design
+│   ├── refactor/           # /spirit:refactor
+│   ├── inspect/            # /spirit:inspect
+│   └── debug/              # /spirit:debug
 └── hooks/
     ├── hooks.json          # Hook event configuration
     ├── route-mindset.sh    # UserPromptSubmit
