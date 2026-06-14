@@ -57,6 +57,7 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 |---------|---------|-----------|
 | `/spirit:init` | — | Setup ครั้งเดียวต่อ repo: เพิ่ม `.spirit/` ใน `.gitignore` + สร้าง `.spirit/reflections/` |
 | `/spirit:design` | Ikigai + Shokunin | ออกแบบ feature จากจุดมุ่งหมาย |
+| `/spirit:implement` | Shokunin + Kaizen | เริ่ม implement บน branch ปัจจุบัน อ่าน context จาก issue ใน branch name |
 | `/spirit:refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว ไม่ rewrite |
 | `/spirit:inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
 | `/spirit:debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
@@ -103,6 +104,7 @@ spirit/
 ├── skills/
 │   ├── init/               # /spirit:init
 │   ├── design/             # /spirit:design
+│   ├── implement/          # /spirit:implement
 │   ├── refactor/           # /spirit:refactor
 │   ├── inspect/            # /spirit:inspect
 │   └── debug/              # /spirit:debug
