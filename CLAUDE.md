@@ -21,6 +21,7 @@ Mindset และ skills หลักสำหรับพัฒนา software 
 | Command | Mindset | จุดประสงค์ |
 |---------|---------|-----------|
 | `/spirit:design` | Ikigai + Shokunin | ออกแบบที่ขับเคลื่อนด้วยจุดมุ่งหมาย |
+| `/spirit:implement` | Shokunin + Kaizen | Multi-phase workflow บน branch ปัจจุบัน อ่าน context จาก issue |
 | `/spirit:refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว |
 | `/spirit:inspect` | Shokunin + Kaizen | Code review ระดับงานฝีมือ |
 | `/spirit:debug` | Gaman + Kaizen | วิเคราะห์ root cause อย่างอดทน |
