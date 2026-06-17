@@ -151,6 +151,8 @@ Once an approach is picked:
 
 ### Phase 6 — Quality review *(Shokunin: review every line as if it were someone else's)*
 
+**Step 6a — Dogfood verification (self-affecting spec changes).** Before the adversarial review pass, check whether the diff modifies any slash command specs that Claude itself will execute downstream. If so, **re-read the disk version of each affected spec file** and **simulate the new behavior manually** before declaring the implementation complete. Do not rely on the cached slash command body — disk is the source of truth for verification.
+
 Run an adversarial review pass over the diff. Two options depending on what's available:
 
 - **Preferred:** invoke the project's `/code-review` skill (which already runs multi-agent review in this Claude Code setup). Pass the appropriate effort level for the issue size (`low` for size:xs/s, `medium` for size:m, `high` for size:l).
