@@ -127,11 +127,13 @@ Pick one? [A/B/C/edit]
 Once an approach is picked:
 
 1. **Persist the approach to the issue's `## Notes`** (run once, immediately after the user picks in Phase 4):
-   - Build the line: `- <YYYY-MM-DD>: [approach] <one-line summary of chosen approach>`
+   - Build the line: `- <YYYY-MM-DD>: [approach] <Letter>: <one-line summary of chosen approach>`
      - `<YYYY-MM-DD>` from `date +%Y-%m-%d`.
-     - `<one-line summary>` is the Phase 4 one-liner for the picked option (A/B/C/custom), kept concise — no trailing period needed.
+     - `<Letter>` is the picked option label: `A` (minimal), `B` (clean), `C` (pragmatic), or `Custom` for an edited/fourth option.
+     - `<one-line summary>` is the Phase 4 one-liner for the picked option, kept concise — no trailing period needed.
+   - This exact format (the literal `[approach]` token followed by the letter) is what `/solo:done`'s rich PR body renderer scans for when building the "Approach" call-out in the PR Summary. Do not change the token or omit the letter — both are required for the call-out to render.
    - Fetch current body: `gh issue view <n> --repo <owner/repo> --json body -q .body`.
-   - **Idempotency check**: if an identical `- <YYYY-MM-DD>: [approach] <summary>` line (same date + same summary) already exists in the body, skip the write entirely and note "approach line already present — skipping append" in Phase 7's summary. This guards against re-running Phase 5 in the same session.
+   - **Idempotency check**: if an identical `- <YYYY-MM-DD>: [approach] <Letter>: <summary>` line (same date + same letter + same summary) already exists in the body, skip the write entirely and note "approach line already present — skipping append" in Phase 7's summary. This guards against re-running Phase 5 in the same session.
    - **If a `## Notes` section exists** (regex: `(?m)^## Notes\s*$`): append the new line at the end of that section — before the next `##` heading, or before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Preserve a single blank line between existing content and the appended line.
    - **If `## Notes` is missing**: create it. Insert `\n## Notes\n\n<line>\n` immediately before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Keep a single blank line above the new heading.
    - Update the body via `gh issue edit <n> --repo <owner/repo> --body-file -` (pipe the new body on stdin to preserve newlines).
