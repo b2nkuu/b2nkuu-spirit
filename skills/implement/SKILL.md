@@ -126,11 +126,18 @@ Pick one? [A/B/C/edit]
 
 Once an approach is picked:
 
-1. List the implementation steps as ordered todos (each ≤ 30 min of work).
-2. Walk the todos one at a time. Update progress as you go.
-3. Follow the conventions Phase 2 surfaced — file layout, naming, tests, imports. Do not invent new patterns mid-feature.
-4. If you discover a needed deviation from the picked approach, surface it immediately ("the assumption that X holds is false because Y — switching tactic to Z") rather than silently changing course.
-5. Anything you intentionally leave imperfect (deferred test, known edge case, TODO) gets captured as a follow-up `/solo:capture` line at the end of this phase, with a one-line `## Notes` rationale. Do not bury debt.
+1. **Persist the approach to the issue's `## Notes`** (run once, immediately after the user picks in Phase 4):
+   - Build the line: `- <YYYY-MM-DD>: [approach] <one-line summary of chosen approach>`
+     - `<YYYY-MM-DD>` from `date +%Y-%m-%d`.
+     - `<one-line summary>` is the Phase 4 one-liner for the picked option (A/B/C/custom), kept concise — no trailing period needed.
+   - Fetch current body: `gh issue view <n> --repo <owner/repo> --json body -q .body`.
+   - Update the body via `gh issue edit <n> --repo <owner/repo> --body-file -` (pipe the new body on stdin to preserve newlines).
+   - On `gh` failure, print stderr verbatim and continue Phase 5 — do not block implementation on a write failure; surface it in the Phase 7 summary as "⚠ approach line not persisted: <reason>".
+2. List the implementation steps as ordered todos (each ≤ 30 min of work).
+3. Walk the todos one at a time. Update progress as you go.
+4. Follow the conventions Phase 2 surfaced — file layout, naming, tests, imports. Do not invent new patterns mid-feature.
+5. If you discover a needed deviation from the picked approach, surface it immediately ("the assumption that X holds is false because Y — switching tactic to Z") rather than silently changing course.
+6. Anything you intentionally leave imperfect (deferred test, known edge case, TODO) gets captured as a follow-up `/solo:capture` line at the end of this phase, with a one-line `## Notes` rationale. Do not bury debt.
 
 ### Phase 6 — Quality review *(Shokunin: review every line as if it were someone else's)*
 
