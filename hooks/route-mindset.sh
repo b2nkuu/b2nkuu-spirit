@@ -35,6 +35,10 @@ INJECTION=""
 if echo "$PROMPT" | grep -qE '\b(debug|error|bug|fix|broken|crash|fail|exception|traceback|incident)\b|บั๊ก|บัค|พัง|ไม่ทำงาน|ทำไมถึง|แก้บั๊ก|หาสาเหตุ'; then
   INJECTION="[GAMAN] Endure with patience. Understand root cause before proposing any fix. Ask why five times. Do not patch symptoms."
 
+elif echo "$PROMPT" | grep -qE '\b(implement|code up|write code|ship|develop|build it|make it|deliver)\b|เขียน code|ลงมือ|ทำเลย|implement|พัฒนา feature|ปั้น'; then
+  INJECTION="[SHOKUNIN+KAIZEN] Implement as a craftsman, one small step at a time. Names, structure, and clarity matter. Make the smallest correct change, verify, then continue."
+  [ "$SOLOFLOW_INSTALLED" = "yes" ] && INJECTION="$INJECTION Use /spirit:implement to stay aligned with the issue's purpose."
+
 elif echo "$PROMPT" | grep -qE '\b(review|quality|check|inspect|assess|pr|pull request|lgtm)\b|รีวิว|ตรวจ code|เช็ค code|ดูคุณภาพ'; then
   INJECTION="[SHOKUNIN] Review as a master craftsman. Every name, structure, and decision reflects care or its absence. Name what excels and what can improve."
 

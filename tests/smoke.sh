@@ -54,6 +54,13 @@ t_route_shokunin() {
 }
 run "SHOKUNIN injected for review keyword" t_route_shokunin
 
+t_route_implement() {
+  local out
+  out=$(echo '{"prompt":"implement this feature"}' | bash hooks/route-mindset.sh)
+  echo "$out" | jq -e '.hookSpecificOutput.additionalContext | test("SHOKUNIN\\+KAIZEN")' > /dev/null
+}
+run "SHOKUNIN+KAIZEN injected for implement keyword" t_route_implement
+
 t_route_no_kanso() {
   local out
   out=$(echo '{"prompt":"explain this code"}' | bash hooks/route-mindset.sh)
