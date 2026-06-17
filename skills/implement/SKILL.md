@@ -149,7 +149,28 @@ Once an approach is picked:
 5. If you discover a needed deviation from the picked approach, surface it immediately ("the assumption that X holds is false because Y — switching tactic to Z") rather than silently changing course.
 6. Anything you intentionally leave imperfect (deferred test, known edge case, TODO) gets captured as a follow-up `/solo:capture` line at the end of this phase, with a one-line `## Notes` rationale. Do not bury debt.
 
-### Phase 6 — Quality review *(Shokunin: review every line as if it were someone else's)*
+### Phase 6 — Quality review + Dogfood verification *(Shokunin: review every line as if it were someone else's)*
+
+**Step 6a — Dogfood verification (self-affecting spec changes).** Before the adversarial review pass, check whether the diff modifies any slash command specs that Claude itself will execute downstream. If so, **re-read the disk version of each affected spec file** and **simulate the new behavior manually** before declaring the implementation complete. Do not rely on the cached slash command body — disk is the source of truth for verification.
+
+Example trigger paths (any diff touching these counts as a self-affecting spec change):
+
+- solo: `commands/*.md` (slash command bodies that `/solo:*` commands execute)
+- spirit: `skills/*/SKILL.md` (skill specs that `/spirit:*` commands execute)
+- downstream: any other plugin's `commands/*.md` or `skills/*/SKILL.md` that this Claude Code session has loaded and may invoke before reload
+
+Skip rule — when to skip the dogfood step (no noise):
+
+- If the diff only touches non-spec source files (regular code, tests, fixtures, hooks, docs that are not slash command specs), **skip dogfood verification entirely** (skip non-spec changes by default) and proceed straight to the adversarial review pass. Do not announce the skip; silence is the signal.
+- The dogfood step runs **only when** at least one path in the diff matches a trigger path above.
+
+Cache-lag scenario — why disk re-read is required:
+
+Slash command bodies and skill specs are read into the Claude Code session at session start (and on `/reload-plugins`). Once cached, that body is what Claude follows when the user invokes the command — even if the file on disk has since been edited. When the current implementation work is itself a change to one of those specs, the *new* behavior lives only on disk; the *cached* behavior is what Claude will keep executing inside this session.
+
+That mismatch is the cache lag. Concretely: a PR that edits `commands/foo.md` adds a new step to `/foo`, but if Claude runs `/foo` later in the same session to "verify" the change, Claude actually walks the pre-edit cached body and reports success against stale behavior. Reload happens only on a new session or explicit `/reload-plugins`.
+
+Therefore, when the diff touches a self-affecting spec, the cached command body is not a trustworthy oracle. Treat the spec on disk as the source of truth: re-read the edited file with the file-read tool and walk through the new behavior step-by-step against the acceptance criteria before declaring the implementation complete.
 
 Run an adversarial review pass over the diff. Two options depending on what's available:
 
@@ -219,5 +240,5 @@ Phase 7 is read-only on the issue body — it does not write the summary to GitH
 | 3 Clarify | Gaman | Do not start until ambiguity is gone |
 | 4 Design | Shokunin | Interface before implementation |
 | 5 Implement | Kaizen + Wabi-Sabi | Small steps; ship + name debt honestly |
-| 6 Review | Shokunin | Every line as someone else's |
+| 6 Review + Dogfood | Shokunin | Every line as someone else's; re-read disk specs when work modifies slash command bodies |
 | 7 Summary | Kanso | Say only what is needed |
