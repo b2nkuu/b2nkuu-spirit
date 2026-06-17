@@ -153,6 +153,17 @@ Once an approach is picked:
 
 **Step 6a — Dogfood verification (self-affecting spec changes).** Before the adversarial review pass, check whether the diff modifies any slash command specs that Claude itself will execute downstream. If so, **re-read the disk version of each affected spec file** and **simulate the new behavior manually** before declaring the implementation complete. Do not rely on the cached slash command body — disk is the source of truth for verification.
 
+Example trigger paths (any diff touching these counts as a self-affecting spec change):
+
+- solo: `commands/*.md` (slash command bodies that `/solo:*` commands execute)
+- spirit: `skills/*/SKILL.md` (skill specs that `/spirit:*` commands execute)
+- downstream: any other plugin's `commands/*.md` or `skills/*/SKILL.md` that this Claude Code session has loaded and may invoke before reload
+
+Skip rule — when to skip the dogfood step (no noise):
+
+- If the diff only touches non-spec source files (regular code, tests, fixtures, hooks, docs that are not slash command specs), **skip Step 6a entirely** and proceed straight to the adversarial review pass. Do not announce the skip; silence is the signal.
+- The dogfood step runs **only when** at least one path in the diff matches a trigger path above.
+
 Run an adversarial review pass over the diff. Two options depending on what's available:
 
 - **Preferred:** invoke the project's `/code-review` skill (which already runs multi-agent review in this Claude Code setup). Pass the appropriate effort level for the issue size (`low` for size:xs/s, `medium` for size:m, `high` for size:l).
