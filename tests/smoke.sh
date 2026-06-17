@@ -113,18 +113,6 @@ run "allows Edit on feature/ branch" t_guard_allows_edit_on_feature
 
 rm -rf "$GUARD_REPO"
 
-# --- kaizen-reflect --------------------------------------------------------
-
-echo "kaizen-reflect.sh"
-
-REFLECT_REPO=$(mktemp -d)
-t_reflect_writes_log() {
-  CLAUDE_PROJECT_DIR="$REFLECT_REPO" bash hooks/kaizen-reflect.sh > /dev/null
-  test -f "$REFLECT_REPO/.spirit/reflections/$(date +%Y-%m-%d).log"
-}
-run "appends to .spirit/reflections/<date>.log" t_reflect_writes_log
-rm -rf "$REFLECT_REPO"
-
 # --- plugin.json -----------------------------------------------------------
 
 echo "plugin.json"

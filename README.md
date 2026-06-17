@@ -55,7 +55,6 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 
 | Command | Mindset | จุดประสงค์ |
 |---------|---------|-----------|
-| `/spirit:init` | — | Setup ครั้งเดียวต่อ repo: เพิ่ม `.spirit/` ใน `.gitignore` + สร้าง `.spirit/reflections/` |
 | `/spirit:design` | Ikigai + Shokunin | ออกแบบ feature จากจุดมุ่งหมาย |
 | `/spirit:implement` | Shokunin + Kaizen | เริ่ม implement บน branch ปัจจุบัน อ่าน context จาก issue ใน branch name |
 | `/spirit:refactor` | Kaizen + Wabi-Sabi | ปรับปรุงทีละก้าว ไม่ rewrite |
@@ -71,7 +70,6 @@ Hook `route-mindset.sh` ตรวจ plugins ที่ติดตั้งอ�
 | Hook | Event | พฤติกรรม |
 |------|-------|---------|
 | `route-mindset.sh` | `UserPromptSubmit` | Detect keyword → inject mindset + plugin reference อัตโนมัติ |
-| `kaizen-reflect.sh` | `Stop` | แสดง reflection 3 ข้อหลัง session จบ |
 
 **Keyword mapping:**
 - `debug` / `error` / `bug` / `พัง` / `บั๊ก` → **Gaman**
@@ -102,7 +100,6 @@ spirit/
 │   ├── gaman.md
 │   └── kanso.md
 ├── skills/
-│   ├── init/               # /spirit:init
 │   ├── design/             # /spirit:design
 │   ├── implement/          # /spirit:implement
 │   ├── refactor/           # /spirit:refactor
@@ -110,6 +107,5 @@ spirit/
 │   └── debug/              # /spirit:debug
 └── hooks/
     ├── hooks.json          # Hook event configuration
-    ├── route-mindset.sh    # UserPromptSubmit
-    └── kaizen-reflect.sh   # Stop
+    └── route-mindset.sh    # UserPromptSubmit
 ```
