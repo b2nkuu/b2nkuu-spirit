@@ -126,11 +126,28 @@ Pick one? [A/B/C/edit]
 
 Once an approach is picked:
 
-1. List the implementation steps as ordered todos (each ≤ 30 min of work).
-2. Walk the todos one at a time. Update progress as you go.
-3. Follow the conventions Phase 2 surfaced — file layout, naming, tests, imports. Do not invent new patterns mid-feature.
-4. If you discover a needed deviation from the picked approach, surface it immediately ("the assumption that X holds is false because Y — switching tactic to Z") rather than silently changing course.
-5. Anything you intentionally leave imperfect (deferred test, known edge case, TODO) gets captured as a follow-up `/solo:capture` line at the end of this phase, with a one-line `## Notes` rationale. Do not bury debt.
+1. **Persist the approach to the issue's `## Notes`** (run once, immediately after the user picks in Phase 4):
+   - Build the line: `- <YYYY-MM-DD>: [approach] <Letter>: <one-line summary of chosen approach>`
+     - `<YYYY-MM-DD>` from `date +%Y-%m-%d`.
+     - `<Letter>` is the picked option label: `A` (minimal), `B` (clean), `C` (pragmatic), or `Custom` for an edited/fourth option.
+     - `<one-line summary>` is the Phase 4 one-liner for the picked option, kept concise — no trailing period needed.
+   - Concrete example (what the appended line must look like verbatim):
+     ```
+     - 2026-06-18: [approach] B: extract render helper into shared module so PR body + issue view reuse it
+     ```
+   - This exact format (the literal `[approach]` token followed by the letter, then `: `, then the summary) is what `/solo:done`'s rich PR body renderer scans for when building the "Approach" call-out in the PR Summary. Do not change the token, omit the letter, or drop the `: ` separator — all three are required for the call-out to render.
+   - Fetch current body: `gh issue view <n> --repo <owner/repo> --json body -q .body`.
+   - **Idempotency check**: if an identical `- <YYYY-MM-DD>: [approach] <Letter>: <summary>` line (same date + same letter + same summary) already exists in the body, skip the write entirely and note "approach line already present — skipping append" in Phase 7's summary. This guards against re-running Phase 5 in the same session.
+   - **If a `## Notes` section exists** (regex: `(?m)^## Notes\s*$`): append the new line at the end of that section — before the next `##` heading, or before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Preserve a single blank line between existing content and the appended line.
+   - **If `## Notes` is missing**: create it. Insert `\n## Notes\n\n<line>\n` immediately before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Keep a single blank line above the new heading.
+   - Update the body via `gh issue edit <n> --repo <owner/repo> --body-file -` (pipe the new body on stdin to preserve newlines).
+   - **Verify the write**: immediately after `gh issue edit`, re-fetch the body with `gh issue view <n> --repo <owner/repo> --json body -q .body` and confirm the exact `[approach] <Letter>:` line is present. If it is not, treat it as a write failure and surface it in Phase 7 as "⚠ approach line not persisted: post-write verification missed the line".
+   - On `gh` failure, print stderr verbatim and continue Phase 5 — do not block implementation on a write failure; surface it in the Phase 7 summary as "⚠ approach line not persisted: <reason>".
+2. List the implementation steps as ordered todos (each ≤ 30 min of work).
+3. Walk the todos one at a time. Update progress as you go.
+4. Follow the conventions Phase 2 surfaced — file layout, naming, tests, imports. Do not invent new patterns mid-feature.
+5. If you discover a needed deviation from the picked approach, surface it immediately ("the assumption that X holds is false because Y — switching tactic to Z") rather than silently changing course.
+6. Anything you intentionally leave imperfect (deferred test, known edge case, TODO) gets captured as a follow-up `/solo:capture` line at the end of this phase, with a one-line `## Notes` rationale. Do not bury debt.
 
 ### Phase 6 — Quality review *(Shokunin: review every line as if it were someone else's)*
 
@@ -166,6 +183,8 @@ Print one block:
 ✅ Implementation pass complete on #<n> — <title>
 
   Approach: <A|B|C|custom>
+  Approach line persisted to issue #<n> Notes — will surface as Approach call-out in /solo:done PR body Summary.
+  (or: ⚠ approach line not persisted: <reason>)
   Files changed: <count>
     - <path>
     - …
@@ -178,10 +197,10 @@ Print one block:
 
 Next:
   /solo:test <n>   — walk the Test Plan
-  /solo:done <n>   — close + open PR
+  /solo:done <n>   — close + open PR (Summary will include the Approach call-out from Notes)
 ```
 
-Read-only on the issue body — does not write the summary to GitHub. The user advances state via `/solo:test` then `/solo:done`.
+Phase 7 is read-only on the issue body — it does not write the summary to GitHub (the `[approach]` line was already persisted in Phase 5). The user advances state via `/solo:test` then `/solo:done`.
 
 ## Non-goals
 
