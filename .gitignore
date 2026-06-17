@@ -1,3 +1,4 @@
 .DS_Store
 .spirit/
+.solo/worktrees/
 .claude/settings.local.json
