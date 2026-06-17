@@ -131,6 +131,8 @@ Once an approach is picked:
      - `<YYYY-MM-DD>` from `date +%Y-%m-%d`.
      - `<one-line summary>` is the Phase 4 one-liner for the picked option (A/B/C/custom), kept concise — no trailing period needed.
    - Fetch current body: `gh issue view <n> --repo <owner/repo> --json body -q .body`.
+   - **If a `## Notes` section exists** (regex: `(?m)^## Notes\s*$`): append the new line at the end of that section — before the next `##` heading, or before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Preserve a single blank line between existing content and the appended line.
+   - **If `## Notes` is missing**: create it. Insert `\n## Notes\n\n<line>\n` immediately before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Keep a single blank line above the new heading.
    - Update the body via `gh issue edit <n> --repo <owner/repo> --body-file -` (pipe the new body on stdin to preserve newlines).
    - On `gh` failure, print stderr verbatim and continue Phase 5 — do not block implementation on a write failure; surface it in the Phase 7 summary as "⚠ approach line not persisted: <reason>".
 2. List the implementation steps as ordered todos (each ≤ 30 min of work).
