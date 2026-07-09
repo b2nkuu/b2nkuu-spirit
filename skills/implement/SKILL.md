@@ -5,12 +5,12 @@ version: 1.0.0
 ---
 # Implement
 
-A structured, multi-phase implementation workflow for solo + spirit users. Reads the issue context from the current branch name (set by `/solo:start`), then walks through discovery → exploration → design → implementation → review → summary so the work is grounded in both the issue's intent and the repo's existing conventions.
+A structured, multi-step implementation workflow for solo + spirit users. Reads the issue context from the current branch name (set by `/solo:start`), then walks through discovery → exploration → design → implementation → review → summary so the work is grounded in both the issue's intent and the repo's existing conventions.
 
 Modeled after the Claude Code `feature-dev` plugin, adapted to:
 
 - Source intent from the GitHub issue (already filled by `/solo:plan`), not a free-text prompt.
-- Wear spirit mindsets at each phase (Ikigai → Shokunin → Kaizen → Gaman → Wabi-Sabi → Kanso).
+- Wear spirit mindsets at each step (Ikigai → Shokunin → Kaizen → Gaman → Wabi-Sabi → Kanso).
 - Hand off cleanly to `/solo:test` and `/solo:done` at the end.
 
 ## When to use
@@ -19,9 +19,9 @@ Modeled after the Claude Code `feature-dev` plugin, adapted to:
 - When picking up an existing branch in a fresh session and you want a structured restart.
 - For features that touch multiple files or need architectural decisions. For one-line fixes, just edit.
 
-## Phases
+## Steps
 
-### Phase 0 — Resolve branch + issue *(Ikigai: anchor purpose before motion)*
+### Step 0 — Resolve branch + issue *(Ikigai: anchor purpose before motion)*
 
 1. Resolve repo:
    - `.solo/config.yml` `repo:` field (if present and not the `"owner/repo"` placeholder).
@@ -50,7 +50,7 @@ Modeled after the Claude Code `feature-dev` plugin, adapted to:
       - [<x or space>] <item>
    ```
 
-### Phase 1 — Discovery *(Ikigai: confirm the "why" before the "how")*
+### Step 1 — Discovery *(Ikigai: confirm the "why" before the "how")*
 
 Read the issue body's `## What`, `## Why`, and any `## Notes`. Decide whether intent is clear:
 
@@ -67,7 +67,7 @@ Open questions:
 
 If there are no open questions, omit the list.
 
-### Phase 2 — Codebase exploration *(Shokunin: understand the grain of the wood)*
+### Step 2 — Codebase exploration *(Shokunin: understand the grain of the wood)*
 
 Launch 2–3 `Explore` subagents **in parallel** (single message, multiple tool calls). Each agent has a distinct focus, derived from the issue body and AC. Pick from:
 
@@ -91,19 +91,19 @@ After they return, Claude reads the highest-signal files itself (≤ 5) before m
      - <file:line>
 ```
 
-### Phase 3 — Clarifying questions *(Gaman: be patient; do not skip ambiguity)*
+### Step 3 — Clarifying questions *(Gaman: be patient; do not skip ambiguity)*
 
 After exploration, re-read the AC and ask any remaining gaps that the codebase did not answer. Common categories: edge cases, error handling, backward compatibility, performance, observability, telemetry, security boundary.
 
-Present every question in one numbered list and wait for answers. If exploration covered everything, skip this phase silently — do not invent questions.
+Present every question in one numbered list and wait for answers. If exploration covered everything, skip this step silently — do not invent questions.
 
-### Phase 4 — Architecture design *(Shokunin: interface before implementation)*
+### Step 4 — Architecture design *(Shokunin: interface before implementation)*
 
 Launch 2–3 `Plan` subagents **in parallel**, each with a distinct lens:
 
 1. **Minimal** — smallest possible change, maximum reuse of existing code.
 2. **Clean** — best long-term shape (clear seams, easy to test) even if more files move.
-3. **Pragmatic** — balance speed against debt; respect the conventions Phase 2 surfaced.
+3. **Pragmatic** — balance speed against debt; respect the conventions Step 2 surfaced.
 
 Compare the three plans and form an opinion. Present:
 
@@ -122,34 +122,34 @@ Pick one? [A/B/C/edit]
 
 `edit` lets the user paste a fourth option or modify a presented one. Wait for an explicit pick before proceeding.
 
-### Phase 5 — Implementation *(Kaizen: small steps; Wabi-Sabi: ship what is useful, name what is debt)*
+### Step 5 — Implementation *(Kaizen: small steps; Wabi-Sabi: ship what is useful, name what is debt)*
 
 Once an approach is picked:
 
-1. **Persist the approach to the issue's `## Notes`** (run once, immediately after the user picks in Phase 4):
+1. **Persist the approach to the issue's `## Notes`** (run once, immediately after the user picks in Step 4):
    - Build the line: `- <YYYY-MM-DD>: [approach] <Letter>: <one-line summary of chosen approach>`
      - `<YYYY-MM-DD>` from `date +%Y-%m-%d`.
      - `<Letter>` is the picked option label: `A` (minimal), `B` (clean), `C` (pragmatic), or `Custom` for an edited/fourth option.
-     - `<one-line summary>` is the Phase 4 one-liner for the picked option, kept concise — no trailing period needed.
+     - `<one-line summary>` is the Step 4 one-liner for the picked option, kept concise — no trailing period needed.
    - Concrete example (what the appended line must look like verbatim):
      ```
      - 2026-06-18: [approach] B: extract render helper into shared module so PR body + issue view reuse it
      ```
    - This exact format (the literal `[approach]` token followed by the letter, then `: `, then the summary) is what `/solo:done`'s rich PR body renderer scans for when building the "Approach" call-out in the PR Summary. Do not change the token, omit the letter, or drop the `: ` separator — all three are required for the call-out to render.
    - Fetch current body: `gh issue view <n> --repo <owner/repo> --json body -q .body`.
-   - **Idempotency check**: if an identical `- <YYYY-MM-DD>: [approach] <Letter>: <summary>` line (same date + same letter + same summary) already exists in the body, skip the write entirely and note "approach line already present — skipping append" in Phase 7's summary. This guards against re-running Phase 5 in the same session.
+   - **Idempotency check**: if an identical `- <YYYY-MM-DD>: [approach] <Letter>: <summary>` line (same date + same letter + same summary) already exists in the body, skip the write entirely and note "approach line already present — skipping append" in Step 7's summary. This guards against re-running Step 5 in the same session.
    - **If a `## Notes` section exists** (regex: `(?m)^## Notes\s*$`): append the new line at the end of that section — before the next `##` heading, or before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Preserve a single blank line between existing content and the appended line.
    - **If `## Notes` is missing**: create it. Insert `\n## Notes\n\n<line>\n` immediately before any trailing HTML comment block (e.g. `<!-- solo:metadata ... -->`), or at end-of-body otherwise. Keep a single blank line above the new heading.
    - Update the body via `gh issue edit <n> --repo <owner/repo> --body-file -` (pipe the new body on stdin to preserve newlines).
-   - **Verify the write**: immediately after `gh issue edit`, re-fetch the body with `gh issue view <n> --repo <owner/repo> --json body -q .body` and confirm the exact `[approach] <Letter>:` line is present. If it is not, treat it as a write failure and surface it in Phase 7 as "⚠ approach line not persisted: post-write verification missed the line".
-   - On `gh` failure, print stderr verbatim and continue Phase 5 — do not block implementation on a write failure; surface it in the Phase 7 summary as "⚠ approach line not persisted: <reason>".
+   - **Verify the write**: immediately after `gh issue edit`, re-fetch the body with `gh issue view <n> --repo <owner/repo> --json body -q .body` and confirm the exact `[approach] <Letter>:` line is present. If it is not, treat it as a write failure and surface it in Step 7 as "⚠ approach line not persisted: post-write verification missed the line".
+   - On `gh` failure, print stderr verbatim and continue Step 5 — do not block implementation on a write failure; surface it in the Step 7 summary as "⚠ approach line not persisted: <reason>".
 2. List the implementation steps as ordered todos (each ≤ 30 min of work).
 3. Walk the todos one at a time. Update progress as you go.
-4. Follow the conventions Phase 2 surfaced — file layout, naming, tests, imports. Do not invent new patterns mid-feature.
+4. Follow the conventions Step 2 surfaced — file layout, naming, tests, imports. Do not invent new patterns mid-feature.
 5. If you discover a needed deviation from the picked approach, surface it immediately ("the assumption that X holds is false because Y — switching tactic to Z") rather than silently changing course.
-6. Anything you intentionally leave imperfect (deferred test, known edge case, TODO) gets captured as a follow-up `/solo:capture` line at the end of this phase, with a one-line `## Notes` rationale. Do not bury debt.
+6. Anything you intentionally leave imperfect (deferred test, known edge case, TODO) gets captured as a follow-up `/solo:capture` line at the end of this step, with a one-line `## Notes` rationale. Do not bury debt.
 
-### Phase 6 — Quality review + Dogfood verification *(Shokunin: review every line as if it were someone else's)*
+### Step 6 — Quality review + Dogfood verification *(Shokunin: review every line as if it were someone else's)*
 
 **Step 6a — Dogfood verification (self-affecting spec changes).** Before the adversarial review pass, check whether the diff modifies any slash command specs that Claude itself will execute downstream. If so, **re-read the disk version of each affected spec file** and **simulate the new behavior manually** before declaring the implementation complete. Do not rely on the cached slash command body — disk is the source of truth for verification.
 
@@ -196,7 +196,7 @@ Consolidate findings, sort by severity:
 
 `l` captures each medium+ finding as a follow-up via `/solo:capture`. `p` records "review acknowledged" without changes — a Wabi-Sabi escape valve.
 
-### Phase 7 — Summary + handoff *(Kanso: say only what is needed)*
+### Step 7 — Summary + handoff *(Kanso: say only what is needed)*
 
 Print one block:
 
@@ -221,18 +221,18 @@ Next:
   /solo:done <n>   — close + open PR (Summary will include the Approach call-out from Notes)
 ```
 
-Phase 7 is read-only on the issue body — it does not write the summary to GitHub (the `[approach]` line was already persisted in Phase 5). The user advances state via `/solo:test` then `/solo:done`.
+Step 7 is read-only on the issue body — it does not write the summary to GitHub (the `[approach]` line was already persisted in Step 5). The user advances state via `/solo:test` then `/solo:done`.
 
 ## Non-goals
 
 - Does not create the branch (`/solo:start` does that).
 - Does not commit, push, or open a PR (`/solo:done` does that).
 - Does not mutate the issue body — read-only on GitHub.
-- Does not skip phases on its own. The user can `[skip]` a phase explicitly when it is clearly unneeded (e.g. trivial change), but the default is to walk all phases.
+- Does not skip steps on its own. The user can `[skip]` a step explicitly when it is clearly unneeded (e.g. trivial change), but the default is to walk all steps.
 
 ## Mindset map
 
-| Phase | Mindset | What it forces |
+| Step | Mindset | What it forces |
 |-------|---------|----------------|
 | 0     | —       | Anchor: which issue, which branch |
 | 1 Discovery | Ikigai | Why are we building this? |
