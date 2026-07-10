@@ -1,4 +1,7 @@
-# spirit
+<div align="center">
+  <img src="resource/logo.png" alt="solo" width="200" />
+  <h1>Spirit ~ Mindset & Skill</h1>
+</div>
 
 Mindset และ skills หลักสำหรับพัฒนา software อ้างอิงปรัชญาการทำงานแบบญี่ปุ่น
 ใช้ร่วมกับ [Claude Code](https://claude.ai/code)
